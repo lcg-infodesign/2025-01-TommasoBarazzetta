@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     p.setup = function() {
       let canvas = p.createCanvas(800, 600);
-      canvas.parent("graficoCanvas"); // aggancia al div del nuovo index
+      canvas.parent("graficoCanvas1"); // aggancia al div del nuovo index
 
       p.background(255);
       p.textFont("monospace");
