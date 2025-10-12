@@ -75,4 +75,11 @@ function draw() {
 
   text("-60",1,404)
 
+  //sfondo disegno 2
+  //push()
+  //fill(100)
+  //rect(0,500,600,450)
+  //pop()
+
+
 }

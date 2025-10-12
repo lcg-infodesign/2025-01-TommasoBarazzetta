@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let col4Vals = [];
 
     p.preload = function() {
-      table = p.loadTable("dataset.copia.csv", "csv", "header");
+      table = p.loadTable("dataset.csv", "csv", "header");
     };
 
     p.setup = function() {
