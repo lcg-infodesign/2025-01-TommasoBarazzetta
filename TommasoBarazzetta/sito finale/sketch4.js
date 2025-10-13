@@ -43,18 +43,18 @@ let sketch4 = function(p) {
     drawBox();
     drawObjects();
 
-    if (phase === 0 && p.frameCount - frameStart > 60) phase = 1;
+    if (phase === 0 && p.frameCount - frameStart > 30) phase = 1;
     if (phase === 1) moveHandIn();
     if (phase === 2) pickObjects();
     if (phase === 3) liftObjects();
 
     //  Reset automatico dopo 500 frame
-    if (p.frameCount - frameStart > 500) {
+    if (p.frameCount - frameStart > 250) {
       initObjects();
       frameStart = p.frameCount;
     }
   };
-
+// scatola
   function drawBox() {
     p.fill(160, 140, 110, 80);
     p.rect(box.x + 10, box.y + 10, box.w, box.h, 20);
@@ -65,7 +65,7 @@ let sketch4 = function(p) {
     p.fill(235, 210, 160);
     p.rect(box.x, box.y, box.w - 40, box.h - 40, 10);
   }
-
+//sferette nella scatola
   function drawObjects() {
     for (let obj of objects) {
       if (!obj.picked) {
@@ -78,16 +78,13 @@ let sketch4 = function(p) {
   }
 
   function moveHandIn() {
-    if (handY < box.y - box.h / 2 + 40) {
-      handY += 5;
-    } else {
-      phase = 2;
-    }
-    drawHand();
-  }
+  // passaggio immediato alla presa
+  phase = 2;
+}
+
 
   function pickObjects() {
-    drawHand();
+    
     let targets = objects.filter(o => p.red(o.color) === 240 && p.green(o.color) === 100);
     if (!picked) {
       targets.forEach(t => (t.picked = true));
@@ -97,7 +94,7 @@ let sketch4 = function(p) {
   }
 
   function liftObjects() {
-    drawHand();
+    
     let targets = objects.filter(o => o.picked);
     liftY = p.lerp(liftY, -150, 0.05);
 
@@ -110,23 +107,15 @@ let sketch4 = function(p) {
       p.pop();
     }
 
-    if (p.frameCount - frameStart > 300) {
+    if (p.frameCount - frameStart > 100) {
       p.fill(80);
       p.textSize(24);
       p.text("Moda trovata!", box.x, box.y + box.h / 2 + 60);
     }
   }
 
-  function drawHand() {
-    p.push();
-    p.fill(240, 210, 180);
-    p.noStroke();
-    p.rect(box.x, handY, 160, 50, 25);
-    for (let i = 0; i < 4; i++) {
-      p.rect(box.x - 60 + i * 40, handY - 35, 25, 40, 10);
-    }
-    p.pop();
-  }
+
+
 };
 
 new p5(sketch4);
